@@ -1,7 +1,10 @@
-﻿namespace CenterEnglishManagement.Models.OtherModels
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace CenterEnglishManagement.Models.OtherModels
 {
     public class Payment
     {
+        [Key]
         public int Id { get; set; }
         public DateTime Name { get; set; }
         public int  Amount { get; set; }

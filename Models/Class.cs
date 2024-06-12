@@ -1,6 +1,6 @@
 ﻿using CenterEnglishManagement.Models.UserModels;
 
-namespace CenterEnglishManagement.Models.OtherModels
+namespace CenterEnglishManagement.Models
 {
     public class Class
     {
