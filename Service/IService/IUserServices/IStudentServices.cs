@@ -1,6 +1,6 @@
 ﻿namespace CenterEnglishManagement.Service.IService.IUserServices
 {
-    public class IStudentServices
+    public interface IStudentServices
     {
     }
 }

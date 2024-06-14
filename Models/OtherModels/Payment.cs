@@ -6,7 +6,7 @@ namespace CenterEnglishManagement.Models.OtherModels
     {
         [Key]
         public int Id { get; set; }
-        public DateTime Name { get; set; }
+        public DateTime Date { get; set; }
         public int  Amount { get; set; }
         public int TotalPaid { get; set; }
         public bool isFullPayment {  get; set; }

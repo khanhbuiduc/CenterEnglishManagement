@@ -12,15 +12,18 @@ namespace CenterEnglishManagement.Context
 
         }
         /*public DbSet<YourEntity> YourEntities { get; set; }*/
+        /*user*/
+        public DbSet<User> Users { get; set; }
         public DbSet<Admin> Amins { get; set; }
         public DbSet<Student> Students { get; set; }
         public DbSet<Parent> Parents {  get; set; }
         public DbSet<Teacher> Teachers { get; set; }
+        /*other*/
         public DbSet<Payment> Payments { get; set; }
         public DbSet<Schedule> Schedules { get; set; }
         public DbSet<StudentAttendance> StudentAttendances { get; set; }
         public DbSet<TuitionFee> TuitionFees { get; set; }
-         
+        
 
     }
 }

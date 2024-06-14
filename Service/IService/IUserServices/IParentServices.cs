@@ -1,6 +1,6 @@
 ﻿namespace CenterEnglishManagement.Service.IService.IUserServices
 {
-    public class IParentServices
+    public interface IParentServices
     {
     }
 }

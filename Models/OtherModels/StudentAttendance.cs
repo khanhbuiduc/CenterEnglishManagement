@@ -7,7 +7,7 @@ namespace CenterEnglishManagement.Models.OtherModels
         [Key]
         public int Id { get; set; }
         public bool IsPresent {  get; set; }
-        public DateTime Name { get; set; }
+        public DateTime Date { get; set; }
         public int StudentId { get; set; }
 
     }

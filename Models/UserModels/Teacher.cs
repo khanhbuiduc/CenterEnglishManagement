@@ -2,13 +2,8 @@
 
 namespace CenterEnglishManagement.Models.UserModels
 {
-    public class Teacher
+    public class Teacher : User
     {
-        [Key]
-        public int Id { get; set; }
-        public required string Name { get; set; }
-        public required string Email { get; set; }
-        public required string Password { get; set; }
 
         public bool IsActive { get; set; }
         public IEnumerable<Class> Classes { get; set; }

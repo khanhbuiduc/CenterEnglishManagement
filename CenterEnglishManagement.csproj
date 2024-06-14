@@ -21,7 +21,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Service\IService\IOtherServices\" />
     <Folder Include="Service\OtherServices\" />
     <Folder Include="Service\UserServices\" />
   </ItemGroup>
