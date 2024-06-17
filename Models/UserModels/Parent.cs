@@ -4,7 +4,8 @@ namespace CenterEnglishManagement.Models.UserModels
 {
     public class Parent:User
     {
-        public required string PhoneNumber { get; set;}
-        public IEnumerable<Student> Chidrent { get; set; }
+        public required string Mobile { get; set;}
+        public string Address {  get; set;}
+        public ICollection<Student> Students { get; set; }
     }
 }

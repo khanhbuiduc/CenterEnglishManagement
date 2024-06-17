@@ -8,7 +8,6 @@ namespace CenterEnglishManagement.Models.OtherModels
         public int Id { get; set; }
         public DateTime Date { get; set; }
         public int  Amount { get; set; }
-        public int TotalPaid { get; set; }
-        public bool isFullPayment {  get; set; }
+        public int StudentId {  get; set; }
     }
 }

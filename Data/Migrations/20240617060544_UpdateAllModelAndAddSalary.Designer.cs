@@ -3,17 +3,20 @@ using System;
 using CenterEnglishManagement.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace CenterEnglishManagement.Migrations
+namespace CenterEnglishManagement.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240617060544_UpdateAllModelAndAddSalary")]
+    partial class UpdateAllModelAndAddSalary
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -341,7 +344,7 @@ namespace CenterEnglishManagement.Migrations
             modelBuilder.Entity("CenterEnglishManagement.Models.OtherModels.StudentAttendance", b =>
                 {
                     b.HasOne("CenterEnglishManagement.Models.UserModels.Student", null)
-                        .WithMany("StudentAttendances")
+                        .WithMany("studentAttendances")
                         .HasForeignKey("StudentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -376,7 +379,7 @@ namespace CenterEnglishManagement.Migrations
                 {
                     b.Navigation("Payments");
 
-                    b.Navigation("StudentAttendances");
+                    b.Navigation("studentAttendances");
                 });
 
             modelBuilder.Entity("CenterEnglishManagement.Models.UserModels.Teacher", b =>

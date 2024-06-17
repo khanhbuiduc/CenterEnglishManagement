@@ -19,10 +19,14 @@ namespace CenterEnglishManagement.Context
         public DbSet<Parent> Parents {  get; set; }
         public DbSet<Teacher> Teachers { get; set; }
         /*other*/
+        public DbSet<Class> classes { get; set; }
+
         public DbSet<Payment> Payments { get; set; }
         public DbSet<Schedule> Schedules { get; set; }
         public DbSet<StudentAttendance> StudentAttendances { get; set; }
         public DbSet<TuitionFee> TuitionFees { get; set; }
+        public DbSet<Salary> Salaries { get; set; }
+
         
 
     }

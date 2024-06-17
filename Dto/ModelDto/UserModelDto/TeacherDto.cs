@@ -1,4 +1,4 @@
-﻿using CenterEnglishManagement.Models;
+﻿using CenterEnglishManagement.Models.OtherModels;
 
 namespace CenterEnglishManagement.Dto.ModelDto.UserModelDto
 {
