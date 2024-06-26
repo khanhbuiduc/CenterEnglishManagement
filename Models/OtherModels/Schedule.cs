@@ -11,11 +11,12 @@ namespace CenterEnglishManagement.Models.OtherModels
         // even: monday,wednesday,friday
         //odd: tueday,thursday,Saturday
         public int Shift {  get; set; }
-        //Shift: 1,2,3
+        //Shift: 7h,14h,18h
         public DateTime StartTime { get; set; }
         public int NumOfSession {  get; set; }
         //NumOfSession=36/72
-        public int IdClass {  get; set; }
+        public int ClassId {  get; set; }
+        public Class? Class { get; set; }
 
     }
 }

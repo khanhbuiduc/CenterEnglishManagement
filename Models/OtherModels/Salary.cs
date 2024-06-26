@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
+﻿using CenterEnglishManagement.Models.UserModels;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.ComponentModel.DataAnnotations;
 
 namespace CenterEnglishManagement.Models.OtherModels
@@ -9,6 +10,7 @@ namespace CenterEnglishManagement.Models.OtherModels
         public int Id { get; set; }
         public int Amount {  get; set; }
         public DateTime Date { get; set; }
-        public int teacherId {  get; set; }
+        public int TeacherId {  get; set; }
+        public User? Teacher { get; set; }
     }
 }

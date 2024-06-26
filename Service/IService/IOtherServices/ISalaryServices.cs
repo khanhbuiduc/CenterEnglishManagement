@@ -2,7 +2,7 @@
 
 namespace CenterEnglishManagement.Service.IService.IOtherServices
 {
-    public interface IPaymentServices:ICommonServices<Payment>
+    public interface ISalaryServices:ICommonServices<Salary>
     {
     }
 }

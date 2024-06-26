@@ -1,6 +1,8 @@
-﻿namespace CenterEnglishManagement.Service.IService.IOtherServices
+﻿using CenterEnglishManagement.Models.OtherModels;
+
+namespace CenterEnglishManagement.Service.IService.IOtherServices
 {
-    public interface ITuitionFeeServices
+    public interface ITuitionFeeServices:ICommonServices<TuitionFee>
     {
     }
 }

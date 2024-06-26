@@ -1,8 +1,18 @@
 using CenterEnglishManagement.Context;
+using CenterEnglishManagement.Extentions;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
-
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAllOrigins",
+        builder =>
+        {
+            builder.AllowAnyOrigin()
+                   .AllowAnyMethod()
+                   .AllowAnyHeader();
+        });
+});
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 //register applicationDBContext
@@ -10,7 +20,8 @@ String defaultContection = builder.Configuration.GetConnectionString("DefaultCon
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
         options.UseNpgsql(defaultContection));
-
+//
+builder.Services.AddScopeService();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -25,6 +36,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+app.UseCors("AllowAllOrigins");
 
 app.UseAuthorization();
 
