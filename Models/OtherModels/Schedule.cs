@@ -8,10 +8,10 @@ namespace CenterEnglishManagement.Models.OtherModels
         [Key]
         public int Id { get; set; }
         public bool DateType { get; set; }
-        // even: monday,wednesday,friday
-        //odd: tueday,thursday,Saturday
+        // true: monday,wednesday,friday
+        //false: tueday,thursday,Saturdayc
         public int Shift {  get; set; }
-        //Shift: 7h,14h,18h
+        //Shift: 1:7h,2:14h,3: 18h
         public DateTime StartTime { get; set; }
         public int NumOfSession {  get; set; }
         //NumOfSession=36/72

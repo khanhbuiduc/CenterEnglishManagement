@@ -1,4 +1,5 @@
 ﻿using CenterEnglishManagement.Context;
+using CenterEnglishManagement.Dto.ModelDto.OtherModelDto;
 using CenterEnglishManagement.Models.OtherModels;
 using CenterEnglishManagement.Models.UserModels;
 using CenterEnglishManagement.Service.IService.IOtherServices;
@@ -49,5 +50,23 @@ namespace CenterEnglishManagement.Service.OtherServices
         {
             return await _context.Classes.AnyAsync(c => c.ClassName == className && c.Grade == grade && c.Year == year);
         }
-            }
+        public async Task<UserDto> GetTeacherByClassIdAsync(int classId)
+        {
+            var classWithTeacher = await _context.Classes
+                .Include(c => c.Teacher)
+                .FirstOrDefaultAsync(c => c.Id == classId);
+            var teacher= classWithTeacher?.Teacher;
+            return  new UserDto
+            {
+                Id = teacher.Id,
+                Name = teacher.Name,
+                Email = teacher.Email,
+                IsActive = teacher.IsActive,
+                Mobile = teacher.Mobile,
+                DOB = teacher.DOB.HasValue?teacher.DOB.Value.ToString("yyyy-MM-dd"):null,
+                Gender = teacher.Gender,
+                Address = teacher.Address
+            };
+        }
+    }
 }

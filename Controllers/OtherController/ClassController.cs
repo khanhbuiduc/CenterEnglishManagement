@@ -4,6 +4,7 @@ using CenterEnglishManagement.Service.IService;
 using CenterEnglishManagement.Service.IService.IOtherServices;
 using CenterEnglishManagement.Service.OtherServices;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace CenterEnglishManagement.Controllers.OtherController
 {
@@ -16,7 +17,7 @@ namespace CenterEnglishManagement.Controllers.OtherController
         {
             _services = services;
         }
-        [HttpPost("class")]
+        [HttpPost("classScheduleTuition")]
         public async Task<IActionResult> CreateClass([FromBody] ClassDto classDto)
         {
             if (classDto == null)
@@ -53,6 +54,18 @@ namespace CenterEnglishManagement.Controllers.OtherController
             };
             await _services.CreateScheduleAsync(schedule);
             return Ok(classDto);
+        }
+        [HttpGet("{id}/teacher")]
+        public async Task<IActionResult> GetTeacherByClassId(int id)
+        {
+            var teacherDto = await _services.GetTeacherByClassIdAsync(id);
+
+            if (teacherDto == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(teacherDto);
         }
     }
 }

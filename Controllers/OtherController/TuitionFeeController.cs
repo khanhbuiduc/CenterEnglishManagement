@@ -14,5 +14,17 @@ namespace CenterEnglishManagement.Controllers.OtherController
         {
             _service = service;
         }
+        [HttpGet("total")]
+        public IActionResult TotalTuitionFees()
+        {
+            var entity = _service.CalculateTotalTuitionFees();
+            return Ok(entity);
+        }
+        [HttpGet("total/{studentId}")]
+        public IActionResult TotalTuitionFeeForUser(int studentId)
+        {
+            var entity = _service.CalculateTotalTuitionFeeForUser(studentId);
+            return Ok(entity);
+        }
     }
 }

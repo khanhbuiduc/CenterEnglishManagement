@@ -4,6 +4,7 @@ using CenterEnglishManagement.Service;
 using CenterEnglishManagement.Service.IService;
 using CenterEnglishManagement.Service.IService.IRelativeTableServices;
 using CenterEnglishManagement.Service.IService.IUserServices;
+using CenterEnglishManagement.Service.RelativeTableServices;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CenterEnglishManagement.Controllers.OtherController
@@ -27,5 +28,18 @@ namespace CenterEnglishManagement.Controllers.OtherController
             var entity = await _services.GetUsersByClassIdAsync(id);
             return Ok(entity);
         }
+        [HttpDelete("class/{classId}/user/{studentId}")]
+        public async Task<IActionResult> DeleteUserClass(int classId, int studentId)
+        {
+            var result = await _services.RemoveUserFromClassAsync(classId, studentId);
+
+            if (!result)
+            {
+                return NotFound();
+            }
+
+            return NoContent();
+        }
+         
     }
 }

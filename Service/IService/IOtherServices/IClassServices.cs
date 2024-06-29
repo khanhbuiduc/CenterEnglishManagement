@@ -1,5 +1,7 @@
-﻿using CenterEnglishManagement.Models.OtherModels;
+﻿using CenterEnglishManagement.Dto.ModelDto.OtherModelDto;
+using CenterEnglishManagement.Models.OtherModels;
 using CenterEnglishManagement.Models.UserModels;
+using Microsoft.AspNetCore.Identity;
 
 namespace CenterEnglishManagement.Service.IService.IOtherServices
 {
@@ -8,5 +10,6 @@ namespace CenterEnglishManagement.Service.IService.IOtherServices
         Task<TuitionFee> CreateTuitionFeeAsync(TuitionFee tuitionFee);
         Task<Schedule> CreateScheduleAsync(Schedule schedule);
         Task<bool> ClassNameExistsAsync(string className, string grade, int year);
+        Task<UserDto> GetTeacherByClassIdAsync(int classId);
     }
 }

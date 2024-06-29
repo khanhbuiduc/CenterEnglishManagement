@@ -1,4 +1,5 @@
 ﻿using CenterEnglishManagement.Context;
+using CenterEnglishManagement.Dto.ModelDto.OtherModelDto;
 using CenterEnglishManagement.Models.OtherModels;
 using CenterEnglishManagement.Models.RelateTable;
 using CenterEnglishManagement.Models.UserModels;
@@ -22,12 +23,39 @@ namespace CenterEnglishManagement.Service.RelativeTableServices
                 .Select(uc => uc.Class!)
                 .ToListAsync();
         }
-        public async Task<IEnumerable<User>> GetUsersByClassIdAsync(int classId)
+        public async Task<IEnumerable<UserDto>> GetUsersByClassIdAsync(int classId)
         {
             return await _context.UserClasses
                 .Where(uc => uc.ClassId == classId)
-                .Select(uc => uc.User!)
+                .Select(uc => new UserDto
+                {
+                    Id = uc.User!.Id,
+                    Name = uc.User.Name,
+                    Email = uc.User.Email,
+                    IsActive = uc.User.IsActive,
+                    Mobile = uc.User.Mobile,
+                    DOB = uc.User.DOB.HasValue ? uc.User.DOB.Value.ToString("yyyy-MM-dd") : null,
+
+                    Gender = uc.User.Gender,
+                    Address = uc.User.Address
+                })
                 .ToListAsync();
+        }
+        public async Task<bool> RemoveUserFromClassAsync(int classId,int studentId)
+        {
+
+            var userClass = await _context.UserClasses
+            .FirstOrDefaultAsync(uc => uc.UserId == studentId && uc.ClassId == classId);
+
+            if (userClass == null)
+            {
+                return false; // or throw an exception if preferred
+            }
+
+            _context.UserClasses.Remove(userClass);
+            await _context.SaveChangesAsync();
+
+            return true;
         }
     }
 }

@@ -7,7 +7,8 @@
         public int Year { get; set; }
         public string ClassName { get; set; }
         public int TuitionFeeAmount { get; set; }
-        public int TeacherId {  get; set; }
-        public  ScheduleDto ScheduleDto {  get; set; }
+        public int TeacherId { get; set; }
+        public ScheduleDto ScheduleDto { get; set; }
+    
     }
 }

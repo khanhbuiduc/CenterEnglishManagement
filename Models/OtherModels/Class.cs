@@ -10,6 +10,7 @@ namespace CenterEnglishManagement.Models.OtherModels
         public int Id { get; set; }
         public bool IsActive { get; set; }
         public string Grade { get; set; }
+        //Grade: 1,2,3
         public int Year { get; set; }
         public string ClassName { get; set; }
         public int TeacherId { get; set; }

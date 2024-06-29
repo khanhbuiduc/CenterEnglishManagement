@@ -5,7 +5,6 @@ using CenterEnglishManagement.Service.IService.IRelativeTableServices;
 using CenterEnglishManagement.Service.IService.IUserServices;
 using CenterEnglishManagement.Service.OtherServices;
 using CenterEnglishManagement.Service.RelativeTableServices;
-using CenterEnglishManagement.Service.UserServices;
 
 namespace CenterEnglishManagement.Extentions
 {

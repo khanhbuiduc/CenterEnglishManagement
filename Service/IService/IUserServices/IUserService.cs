@@ -1,4 +1,5 @@
-﻿using CenterEnglishManagement.Extentions;
+﻿using CenterEnglishManagement.Dto.ModelDto.OtherModelDto;
+using CenterEnglishManagement.Extentions;
 using CenterEnglishManagement.Models.UserModels;
 
 namespace CenterEnglishManagement.Service.IService.IUserServices

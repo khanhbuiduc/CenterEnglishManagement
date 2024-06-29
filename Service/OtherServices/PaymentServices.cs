@@ -11,5 +11,15 @@ namespace CenterEnglishManagement.Service.OtherServices
         {
             _context = context;
         }
+        public int CalculateTotalPayments()
+        {
+            return _context.Payments.Sum(p => p.Amount);
+        }
+
+        // Calculate total payment amount for a specific student by their Id
+        public int CalculateTotalPaymentsForStudent(int studentId)
+        {
+            return _context.Payments.Where(p => p.StudentId == studentId).Sum(p => p.Amount);
+        }
     }
 }

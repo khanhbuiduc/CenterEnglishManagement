@@ -1,16 +1,19 @@
 ﻿using CenterEnglishManagement.Context;
+using CenterEnglishManagement.Dto.ModelDto.OtherModelDto;
 using CenterEnglishManagement.Extentions;
 using CenterEnglishManagement.Models.UserModels;
 using CenterEnglishManagement.Service.IService;
 using CenterEnglishManagement.Service.IService.IUserServices;
 using Microsoft.EntityFrameworkCore;
+using System.Globalization;
+using System.Xml.Linq;
 
-namespace CenterEnglishManagement.Service.UserServices
+namespace CenterEnglishManagement.Service
 {
-    public class UserServices:CommonServices<User>, IUserService
+    public class UserServices : CommonServices<User>, IUserService
     {
         private readonly ApplicationDbContext _context;
-        public UserServices(ApplicationDbContext context):base(context)
+        public UserServices(ApplicationDbContext context) : base(context)
         {
             _context = context;
         }
@@ -50,9 +53,10 @@ namespace CenterEnglishManagement.Service.UserServices
                                      : query.OrderBy(e => EF.Property<object>(e, sortBy));
                 }
 
-                return await query.Skip((pageIndex - 1) * pageSize)
+                var users = await query.Skip((pageIndex - 1) * pageSize)
                                   .Take(pageSize)
                                   .ToListAsync();
+                return users;
             }
             catch (Exception ex)
             {
