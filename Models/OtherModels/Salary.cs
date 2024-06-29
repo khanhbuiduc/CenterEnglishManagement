@@ -1,15 +1,16 @@
 ﻿using CenterEnglishManagement.Models.UserModels;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.ComponentModel.DataAnnotations;
 
 namespace CenterEnglishManagement.Models.OtherModels
 {
-    public class Payment
+    public class Salary
     {
         [Key]
         public int Id { get; set; }
+        public int Amount {  get; set; }
         public DateTime Date { get; set; }
-        public int  Amount { get; set; }
-        public int StudentId {  get; set; }
-        public User? Student { get; set; }
+        public int TeacherId {  get; set; }
+        public User? Teacher { get; set; }
     }
 }

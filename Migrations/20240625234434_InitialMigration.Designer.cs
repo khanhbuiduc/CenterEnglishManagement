@@ -3,6 +3,7 @@ using System;
 using CenterEnglishManagement.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace CenterEnglishManagement.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240625234434_InitialMigration")]
+    partial class InitialMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -276,7 +279,7 @@ namespace CenterEnglishManagement.Migrations
             modelBuilder.Entity("CenterEnglishManagement.Models.OtherModels.Class", b =>
                 {
                     b.HasOne("CenterEnglishManagement.Models.UserModels.User", "Teacher")
-                        .WithMany("Classes")
+                        .WithMany()
                         .HasForeignKey("TeacherId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -330,13 +333,11 @@ namespace CenterEnglishManagement.Migrations
 
             modelBuilder.Entity("CenterEnglishManagement.Models.OtherModels.TuitionFee", b =>
                 {
-                    b.HasOne("CenterEnglishManagement.Models.OtherModels.Class", "Class")
+                    b.HasOne("CenterEnglishManagement.Models.OtherModels.Class", null)
                         .WithOne("TuitionFee")
                         .HasForeignKey("CenterEnglishManagement.Models.OtherModels.TuitionFee", "ClassId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Class");
                 });
 
             modelBuilder.Entity("CenterEnglishManagement.Models.RelateTable.StudentParent", b =>
@@ -392,8 +393,6 @@ namespace CenterEnglishManagement.Migrations
 
             modelBuilder.Entity("CenterEnglishManagement.Models.UserModels.User", b =>
                 {
-                    b.Navigation("Classes");
-
                     b.Navigation("Payments");
 
                     b.Navigation("Salaries");

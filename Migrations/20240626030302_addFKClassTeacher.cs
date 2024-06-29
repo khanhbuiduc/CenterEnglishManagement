@@ -2,10 +2,10 @@
 
 #nullable disable
 
-namespace CenterEnglishManagement.Data.Migrations
+namespace CenterEnglishManagement.Migrations
 {
     /// <inheritdoc />
-    public partial class test1 : Migration
+    public partial class addFKClassTeacher : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
