@@ -17,9 +17,13 @@ namespace CenterEnglishManagement.Controllers.OtherController
         {
             _services = services;
         }
+            
+
         [HttpPost("classScheduleTuition")]
         public async Task<IActionResult> CreateClass([FromBody] ClassDto classDto)
         {
+
+
             if (classDto == null)
             {
                 return BadRequest();

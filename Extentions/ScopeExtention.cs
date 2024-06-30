@@ -24,6 +24,7 @@ namespace CenterEnglishManagement.Extentions
             services.AddScoped<ITuitionFeeServices, TuitionFeeServices>();
             //ralativve Scope
             services.AddScoped<IUserClassServices, UserClassServices>();
+            services.AddScoped<IStudentParentServices, StudentParentServices>();
         }
     }
 }

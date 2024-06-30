@@ -22,6 +22,7 @@ namespace CenterEnglishManagement.Controllers.OtherController
             return Ok(entity);
         }
         [HttpGet("total/{idStudent}")]
+
         public IActionResult PaymentsForStudent(int idStudent)
         {
             var entity = _services.CalculateTotalPaymentsForStudent(idStudent);
