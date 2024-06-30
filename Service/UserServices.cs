@@ -6,6 +6,7 @@ using CenterEnglishManagement.Service.IService;
 using CenterEnglishManagement.Service.IService.IUserServices;
 using Microsoft.EntityFrameworkCore;
 using System.Globalization;
+using System.Security.Cryptography;
 using System.Xml.Linq;
 
 namespace CenterEnglishManagement.Service
@@ -64,5 +65,20 @@ namespace CenterEnglishManagement.Service
                 throw;
             }
         }
+        public async Task<User> ValidateUser(string email, string password)
+        {
+            if (email == null|| password==null)
+            {
+                return null;
+            }
+            User user = await _context.Users.FirstOrDefaultAsync(e => e.Email == email&&e.Password==password);
+            if (user == null)
+            {
+                return null;
+            }
+
+            return user;
+        }
+        
     }
 }

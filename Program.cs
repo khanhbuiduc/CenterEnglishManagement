@@ -1,6 +1,9 @@
 using CenterEnglishManagement.Context;
 using CenterEnglishManagement.Extentions;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddCors(options =>
@@ -12,6 +15,33 @@ builder.Services.AddCors(options =>
                    .AllowAnyMethod()
                    .AllowAnyHeader();
         });
+});
+
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            ValidIssuer = "yourdomain.com",
+            ValidAudience = "yourdomain.com",
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("your_secret_key"))
+        };
+    });
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("StudentPolicy", policy => policy.RequireRole(UserRole.Student.ToString()));
+    options.AddPolicy("AdminPolicy", policy => policy.RequireRole(UserRole.Admin.ToString()));
+    options.AddPolicy("TeacherPolicy", policy => policy.RequireRole(UserRole.Teacher.ToString()));
+    options.AddPolicy("StudentOrTeacherPolicy", policy =>
+        policy.RequireRole(UserRole.Student.ToString(), UserRole.Student.ToString()));
 });
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -39,6 +69,7 @@ app.UseStaticFiles();
 app.UseRouting();
 app.UseCors("AllowAllOrigins");
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(

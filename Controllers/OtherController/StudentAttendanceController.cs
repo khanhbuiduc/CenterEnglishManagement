@@ -5,6 +5,7 @@ using CenterEnglishManagement.Models.OtherModels;
 using CenterEnglishManagement.Service;
 using CenterEnglishManagement.Service.IService;
 using CenterEnglishManagement.Service.IService.IOtherServices;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -35,14 +36,17 @@ namespace CenterEnglishManagement.Controllers.OtherController
 
 
         [HttpGet("monthly")]
+        /*[Authorize(Policy = "AdminPolicy")]*/
         public IActionResult GetMonthlyStudent()
         {
             List<MonthlyStudentStatisticDto> entity= _StudentAttendanceServices.GetMonthlyStudentAttendanceAsync();
             return Ok(entity);
         }
         [HttpGet("quarterly")]
+        [Authorize(Policy = "StudentPolicy")]
         public IActionResult GetQuarterlyStudent()
         {
+
             List<QuarterlyStudentStatisticDto> entity = _StudentAttendanceServices.GetQuarterlyStudentAttendanceAsync();
             return Ok(entity);
         }

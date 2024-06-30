@@ -8,5 +8,6 @@ namespace CenterEnglishManagement.Service.IService.IUserServices
     {
         Task<IEnumerable<User>> GetAllStudentAsync(int pageIndex, int pageSize, string sortBy, bool sortDesc);
         Task<IEnumerable<User>> GetAllByRoleAsync(int pageIndex, int pageSize, string sortBy, bool sortDesc, UserRole role);
+        Task<User> ValidateUser(string email, string password);
     }
 }
