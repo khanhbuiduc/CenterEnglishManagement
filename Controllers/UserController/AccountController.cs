@@ -30,7 +30,7 @@ namespace CenterEnglishManagement.Controllers
             }
             var token = GenerateJwtToken(user);
             HttpContext.Response.Cookies.Append("AuthToken", token);
-            return Ok(new { token ,user.Id});
+            return Ok(new { token ,user.Id,user.Role});
 
         }
         [HttpPost("logout")]
