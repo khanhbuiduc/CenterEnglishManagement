@@ -105,5 +105,12 @@ namespace CenterEnglishManagement.Controllers.OtherController
             var years = await _services.FindYearByNameAsync(grade, name);
             return Ok(years);
         }
+        [HttpGet("{classId}/schedule")]
+        public async Task<IActionResult> GetScheduleByIdClasss(int classId)
+        {
+            var schedule= await _services.FindSchedule(classId);
+            return Ok(schedule);
+        }
+            
     }
 }
