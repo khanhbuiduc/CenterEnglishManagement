@@ -14,5 +14,6 @@ namespace CenterEnglishManagement.Service.IService.IOtherServices
         Task<IEnumerable<Class>> FindClassByGradeAsync(string grade);
         Task<IEnumerable<Class>> FindClassByYearAsync(string grade, int year);
         Task<IEnumerable<Class>> FindClassByNameAsync(string grade, int year, string name);
+        Task<IEnumerable<int>> FindYearByNameAsync(string grade, string name);
     }
 }
