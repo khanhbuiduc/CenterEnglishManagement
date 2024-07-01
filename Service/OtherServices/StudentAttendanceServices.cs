@@ -2,6 +2,7 @@
 using CenterEnglishManagement.Dto.ModelDto;
 using CenterEnglishManagement.Models.OtherModels;
 using CenterEnglishManagement.Service.IService.IOtherServices;
+using Microsoft.EntityFrameworkCore;
 
 namespace CenterEnglishManagement.Service.OtherServices
 {
@@ -12,11 +13,11 @@ namespace CenterEnglishManagement.Service.OtherServices
         {
             _context = context;
         }
-        public List<MonthlyStudentStatisticDto> GetMonthlyStudentAttendanceAsync()
+        public async Task<List<MonthlyStudentStatisticDto>> GetMonthlyStudentAttendanceAsync()
         {
         
 
-            var monthlyStatistics = _context.StudentAttendances
+            var monthlyStatistics =await _context.StudentAttendances
                 .GroupBy(a => new { a.Date.Year, a.Date.Month })
                 .Select(g => new MonthlyStudentStatisticDto
                 {
@@ -24,13 +25,13 @@ namespace CenterEnglishManagement.Service.OtherServices
                     Month = g.Key.Month,
                     StudentCount = g.Select(a => a.UserId).Distinct().Count()
                 })
-                .ToList();
+                .ToListAsync();
 
             return monthlyStatistics;
         }
-        public List<QuarterlyStudentStatisticDto> GetQuarterlyStudentAttendanceAsync()
+        public async Task<List<QuarterlyStudentStatisticDto>> GetQuarterlyStudentAttendanceAsync()
         {
-            var quarterlyStatistics = _context.StudentAttendances
+            var quarterlyStatistics =await _context.StudentAttendances
                 .GroupBy(a => new
                 {
                     a.Date.Year,
@@ -42,21 +43,21 @@ namespace CenterEnglishManagement.Service.OtherServices
                     Quarter = g.Key.Quarter,
                     StudentCount = g.Select(a => a.UserId).Distinct().Count()
                 })
-                .ToList();
+                .ToListAsync();
 
             return quarterlyStatistics;
         }
 
-        public List<YearlyStudentStatisticDto> GetYearlyStudentAttendanceAsync()
+        public async Task<List<YearlyStudentStatisticDto>> GetYearlyStudentAttendanceAsync()
         {
-            var yearlyStatistics = _context.StudentAttendances
+            var yearlyStatistics =await _context.StudentAttendances
                 .GroupBy(a => a.Date.Year)
                 .Select(g => new YearlyStudentStatisticDto
                 {
                     Year = g.Key,
                     StudentCount = g.Select(a => a.UserId).Distinct().Count()
                 })
-                .ToList();
+                .ToListAsync();
 
             return yearlyStatistics;
         }

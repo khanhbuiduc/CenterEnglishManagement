@@ -30,7 +30,7 @@ namespace CenterEnglishManagement.Controllers
             }
             var token = GenerateJwtToken(user);
             HttpContext.Response.Cookies.Append("AuthToken", token);
-            return Ok(new { token });
+            return Ok(new { token ,user.Id});
 
         }
         [HttpPost("logout")]
@@ -60,5 +60,17 @@ namespace CenterEnglishManagement.Controllers
 
             return tokenHandler.WriteToken(token);
         }
+        /*[HttpGet("userinfo")]
+        public IActionResult GetUserInfo()
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var userName = User;
+
+            return Ok(new
+            {
+                UserId = userId,
+                UserName = userName
+            });
+        }*/
     }
 }
