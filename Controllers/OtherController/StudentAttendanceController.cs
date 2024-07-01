@@ -24,6 +24,7 @@ namespace CenterEnglishManagement.Controllers.OtherController
 
         }
         [HttpPost("class")]
+        /*[Authorize(Policy = "AdminPolicy")]*/
         public async Task<IActionResult> CreateStudentAttendanceByClass(List<StudentAttendanceDto> studentAttendanceDtos) {
             foreach (var attendanceDto in studentAttendanceDtos)
             {
@@ -36,14 +37,14 @@ namespace CenterEnglishManagement.Controllers.OtherController
 
 
         [HttpGet("monthly")]
-        /*[Authorize(Policy = "AdminPolicy")]*/
+        [Authorize(Policy = "StudentPolicy")]
         public IActionResult GetMonthlyStudent()
         {
             List<MonthlyStudentStatisticDto> entity= _StudentAttendanceServices.GetMonthlyStudentAttendanceAsync();
             return Ok(entity);
         }
         [HttpGet("quarterly")]
-        [Authorize(Policy = "StudentPolicy")]
+        /*[Authorize(Policy = "StudentPolicy")]*/
         public IActionResult GetQuarterlyStudent()
         {
 

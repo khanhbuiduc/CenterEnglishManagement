@@ -41,23 +41,22 @@ namespace CenterEnglishManagement.Controllers
             var jwtToken = handler.ReadJwtToken(token);
 
             var expirationDate = jwtToken.ValidTo;
-
+            HttpContext.Response.Cookies.Delete("AuthToken");
             return Ok(new { message = "Logged out successfully" });
         }
         private string GenerateJwtToken(User user)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes("gkjhjhgggfdsgsgsgtdsgdsgdsgdssdgsdgdsjk");
+            var key = Encoding.ASCII.GetBytes("hfdghfghdfghfghdfghfgvbcnfsdghfnbavmsrfdsjkhfgsnmbdsvajhgxchzjbbvygvouiyafs");
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new[] { new Claim(ClaimTypes.Name, user.Name), new Claim(ClaimTypes.Role, user.Role.ToString()) }),
                 Expires = DateTime.UtcNow.AddDays(7),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature),
-                Issuer = "jhjlkhljkljk",
-                Audience = "cxzvknxzjvhjkk"
+                Issuer = "sadfsadfasdfsdfdsafdasdfasdf",
+                Audience = "asdfsadfsadfsdffdsfasdfasdfsa"
             };
             var token = tokenHandler.CreateToken(tokenDescriptor); 
-            HttpContext.Response.Cookies.Append("AuthToken", "");
 
             return tokenHandler.WriteToken(token);
         }

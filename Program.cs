@@ -30,9 +30,9 @@ builder.Services.AddAuthentication(options =>
             ValidateAudience = true,
             ValidateLifetime = true,
             ValidateIssuerSigningKey = true,
-            ValidIssuer = "yourdomain.com",
-            ValidAudience = "yourdomain.com",
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("your_secret_key"))
+            ValidIssuer = "sadfsadfasdfsdfdsafdasdfasdf",
+            ValidAudience = "asdfsadfsadfsdffdsfasdfasdfsa",
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("hfdghfghdfghfghdfghfgvbcnfsdghfnbavmsrfdsjkhfgsnmbdsvajhgxchzjbbvygvouiyafs"))
         };
     });
 builder.Services.AddAuthorization(options =>
@@ -41,7 +41,7 @@ builder.Services.AddAuthorization(options =>
     options.AddPolicy("AdminPolicy", policy => policy.RequireRole(UserRole.Admin.ToString()));
     options.AddPolicy("TeacherPolicy", policy => policy.RequireRole(UserRole.Teacher.ToString()));
     options.AddPolicy("StudentOrTeacherPolicy", policy =>
-        policy.RequireRole(UserRole.Student.ToString(), UserRole.Student.ToString()));
+        policy.RequireRole(UserRole.Student.ToString(), UserRole.Teacher.ToString()));
 });
 // Add services to the container.
 builder.Services.AddControllersWithViews();

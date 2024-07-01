@@ -71,5 +71,23 @@ namespace CenterEnglishManagement.Controllers.OtherController
 
             return Ok(teacherDto);
         }
+        [HttpGet("Grade")]
+        public async Task<IActionResult> GetClassesByGrade(string grade)
+        {
+            var classes=await _services.FindClassByGradeAsync(grade);
+            return Ok(classes);
+        }
+        [HttpGet("Grade/Year")]
+        public async Task<IActionResult> GetClassesByYear(string grade,int year)
+        {
+            var classes = await _services.FindClassByYearAsync(grade,year);
+            return Ok(classes);
+        }
+        [HttpGet("Grade/Year/Name")]
+        public async Task<IActionResult> GetClassesByName(string grade, int year,string name)
+        {
+            var classes = await _services.FindClassByNameAsync(grade, year,name);
+            return Ok(classes);
+        }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using CenterEnglishManagement.Context;
 using CenterEnglishManagement.Dto.ModelDto.OtherModelDto;
 using CenterEnglishManagement.Extentions;
+using CenterEnglishManagement.Models.OtherModels;
 using CenterEnglishManagement.Models.UserModels;
 using CenterEnglishManagement.Service.IService;
 using CenterEnglishManagement.Service.IService.IUserServices;
@@ -79,6 +80,43 @@ namespace CenterEnglishManagement.Service
 
             return user;
         }
-        
+        public List<int> PaymentandTuitionTotal()
+        {
+            int paymentTotal = CalculateTotalPayments();
+            int tuitionTotal = CalculateTotalTuitionFees();
+            return new List<int> { paymentTotal, tuitionTotal };
+        }
+        public async Task<IEnumerable<Class>> GetTeacherClassesAsync(int teacherId)
+        {
+
+            var classes = await _context.Classes
+                            .Where(c => c.TeacherId == teacherId)
+                            .ToListAsync();
+
+
+                return classes;
+            
+        }
+
+
+        /// <summary>
+        /// sub method
+        /// </summary>
+        /// <returns></returns>
+        public int CalculateTotalPayments()
+        {
+            return _context.Payments.Sum(p => p.Amount);
+        }
+        public int CalculateTotalTuitionFees()
+        {
+            var totalFees = (from attendance in _context.StudentAttendances
+                             where attendance.IsPresent
+                             join userClass in _context.UserClasses on attendance.UserId equals userClass.UserId
+                             join tuitionFee in _context.TuitionFees on userClass.ClassId equals tuitionFee.ClassId
+                             select tuitionFee.Amount).Sum();
+
+            return totalFees;
+        }
+
     }
 }

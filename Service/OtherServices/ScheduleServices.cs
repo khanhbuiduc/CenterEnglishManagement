@@ -11,5 +11,6 @@ namespace CenterEnglishManagement.Service.OtherServices
         {
             _context = context;
         }
+
     }
 }
