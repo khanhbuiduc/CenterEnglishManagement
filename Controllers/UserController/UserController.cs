@@ -9,6 +9,8 @@ using CenterEnglishManagement.Dto.ModelDto.OtherModelDto;
 using AutoMapper;
 using System.Text.Json.Serialization;
 using System.Text.Json;
+using Microsoft.IdentityModel.Tokens;
+using CenterEnglishManagement.Service;
 
 namespace CenterEnglishManagement.Controllers.UserController
 {
@@ -63,6 +65,17 @@ namespace CenterEnglishManagement.Controllers.UserController
             await _services.CreateAsync(user);
             return Ok(user);
         }
+        [HttpPut("role/{userId}")]
+        public async Task<IActionResult> EditUserByRole([FromBody] EditUserRoleDto userDto,int userId)
+        {
+            User user= await _services.GetbyIdAsync(userId);
+            user.Name = userDto.Name;
+            user.Mobile = userDto.Mobile;
+            user.DOB = string.IsNullOrEmpty(userDto.DOB) ? (DateTime?)null : DateTime.SpecifyKind(DateTime.ParseExact(userDto.DOB, "yyyy-MM-dd", null), DateTimeKind.Utc);
+            user.Gender = userDto.Gender;
+            await _services.UpdateUserAsync(user);
+            return Ok(user);
+        }
         [HttpGet("totalPayment")]
         public IActionResult GetPaymentandTuitionTotal() { 
             return Ok(_services.PaymentandTuitionTotal());
@@ -72,17 +85,22 @@ namespace CenterEnglishManagement.Controllers.UserController
         {
             var classes = await _services.GetTeacherClassesAsync(idTeacher);
             return Ok(classes);
-            /*// Configure JsonSerializerOptions with ReferenceHandler.Preserve
-            var jsonOptions = new JsonSerializerOptions
+        }
+        private static List<InfinityStudentIdDto> _infinityStudentIds = new List<InfinityStudentIdDto>();
+        [HttpGet("student/infiniteId")]
+        public IActionResult Get()
+        {
+            return Ok(_infinityStudentIds);
+        }
+        [HttpPost("student/infiniteId/{studentId}")]
+        public IActionResult Post(int studentId)
+        {
+             _infinityStudentIds.Add(new InfinityStudentIdDto
             {
-                ReferenceHandler = ReferenceHandler.Preserve
-            };
-
-            // Serialize classes to JSON with configured options
-            var serializedClasses = JsonSerializer.Serialize(classes, jsonOptions);
-
-            // Return serialized classes in the response
-            return Ok(serializedClasses);*/
+                 Id = _infinityStudentIds.Count+1,
+                StudentId = studentId
+            });
+            return Ok(_infinityStudentIds);
         }
     }
     
