@@ -3,6 +3,7 @@ using CenterEnglishManagement.Models.OtherModels;
 using CenterEnglishManagement.Service.IService;
 using CenterEnglishManagement.Service.IService.IOtherServices;
 using CenterEnglishManagement.Service.OtherServices;
+using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -47,12 +48,13 @@ namespace CenterEnglishManagement.Controllers.OtherController
                 Amount = classDto.TuitionFeeAmount,
                 ClassId = createdClass.Id
             };
+            DateTime date = DateTime.SpecifyKind(DateTime.ParseExact(classDto.ScheduleDto.StartTime, "yyyy-MM-dd", null), DateTimeKind.Utc);
             await _services.CreateTuitionFeeAsync(tuitionFee);
             var schedule = new Schedule
             {
                 DateType = classDto.ScheduleDto.DateType,
                 Shift = classDto.ScheduleDto.Shift,
-                StartTime = classDto.ScheduleDto.StartTime,
+                StartTime = date,
                 NumOfSession = classDto.ScheduleDto.NumOfSession,
                 ClassId = createdClass.Id
             };
