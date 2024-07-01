@@ -12,8 +12,9 @@ namespace CenterEnglishManagement.Service.OtherServices
         {
             _context = context;
         }
-        public async Task<List<string>> GetScheduleDatesAsync(int  classId)
+        public async Task<List<string>> GetScheduleDatesAsync(int  studentId)
         {
+            int classId=await _context.UserClasses.Where(uc=>uc.UserId==studentId).Select(uc=>uc.Id).FirstOrDefaultAsync();
             var schedule=await _context.Schedules.FirstOrDefaultAsync(s=>s.ClassId==classId);
             var dates = new List<string>();
             DateTime startTime = schedule.StartTime;

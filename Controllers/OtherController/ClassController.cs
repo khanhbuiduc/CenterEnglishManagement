@@ -18,9 +18,15 @@ namespace CenterEnglishManagement.Controllers.OtherController
         {
             _services = services;
         }
-            
 
-        [HttpPost("classScheduleTuition")]
+        /*[HttpGet("classScheduleTuition/{classId}")]
+        public async Task<IActionResult> FindClassById(int classId)
+        { 
+            _services.F
+        
+        
+        }*/
+            [HttpPost("classScheduleTuition")]
         public async Task<IActionResult> CreateClass([FromBody] ClassDto classDto)
         {
 
@@ -62,6 +68,7 @@ namespace CenterEnglishManagement.Controllers.OtherController
             await _services.CreateScheduleAsync(schedule);
             return Ok(classDto);
         }
+
         [HttpGet("{id}/teacher")]
         public async Task<IActionResult> GetTeacherByClassId(int id)
         {
@@ -92,5 +99,18 @@ namespace CenterEnglishManagement.Controllers.OtherController
             var classes = await _services.FindClassByNameAsync(grade, year,name);
             return Ok(classes);
         }
+        [HttpGet("Grade/Name")]
+        public async Task<IActionResult> GetYearsByName(string grade, int year, string name)
+        {
+            var years = await _services.FindYearByNameAsync(grade, name);
+            return Ok(years);
+        }
+        [HttpGet("{classId}/schedule")]
+        public async Task<IActionResult> GetScheduleByIdClasss(int classId)
+        {
+            var schedule= await _services.FindSchedule(classId);
+            return Ok(schedule);
+        }
+            
     }
 }

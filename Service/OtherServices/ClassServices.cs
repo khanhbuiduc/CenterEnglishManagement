@@ -70,10 +70,20 @@ namespace CenterEnglishManagement.Service.OtherServices
             };
 
         }
+        public async Task<IEnumerable<Schedule>> FindSchedule(int classId)
+        {
+            return await _context.Schedules.Where(c => c.ClassId == classId).ToListAsync();
+        }
+        public async Task<IEnumerable<TuitionFee>> FindTuition(int classId)
+        {
+            return await _context.TuitionFees.Where(c => c.ClassId == classId).ToListAsync();
+        }
+
         public async Task<IEnumerable<Class>> FindClassByGradeAsync(string grade)
         {
             return await _context.Classes.Where(c=> c.Grade == grade).ToListAsync();
         }
+        
         public async Task<IEnumerable<Class>> FindClassByYearAsync(string grade,int year)
         {
             return await _context.Classes.Where(c => c.Grade == grade && c.Year==year).ToListAsync();
@@ -81,6 +91,10 @@ namespace CenterEnglishManagement.Service.OtherServices
         public async Task<IEnumerable<Class>> FindClassByNameAsync(string grade, int year,string name)
         {
             return await _context.Classes.Where(c => c.Grade == grade && c.Year == year&&c.ClassName==name).ToListAsync();
+        }
+        public async Task<IEnumerable<int>> FindYearByNameAsync(string grade, string name)
+        {
+            return await _context.Classes.Where(c => c.Grade == grade && c.ClassName == name).Select(c=>c.Year).ToListAsync();
         }
     }
 }
