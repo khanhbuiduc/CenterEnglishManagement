@@ -20,6 +20,11 @@ namespace CenterEnglishManagement.Extentions
                 .ForMember(dest => dest.Date, opt => opt.MapFrom(src => src.Date.ToString("yyyy-MM-dd")));
             CreateMap<StudentAttendanceDto, StudentAttendance>()
                 .ForMember(dest => dest.Date, opt => opt.MapFrom(src => ConvertDateFormatNotNull(src.Date)));
+
+            CreateMap<Payment, PaymentDto>()
+                .ForMember(dest => dest.Date, opt => opt.MapFrom(src => src.Date.ToString("yyyy-MM-dd")));
+            CreateMap<PaymentDto, Payment>()
+                .ForMember(dest => dest.Date, opt => opt.MapFrom(src => ConvertDateFormatNotNull(src.Date)));
         }
         private static DateTime? ConvertDateFormat(string inputDate)
         {

@@ -1,8 +1,8 @@
 ﻿namespace CenterEnglishManagement.Dto.ModelDto.OtherModelDto
 {
-    public class InfinityStudentIdDto
+    public class InfinityUserIdDto
     {
         public int Id { get; set; }
-        public int StudentId { get; set; }
+        public int UserId { get; set; }
     }
 }

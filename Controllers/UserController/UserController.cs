@@ -86,21 +86,57 @@ namespace CenterEnglishManagement.Controllers.UserController
             var classes = await _services.GetTeacherClassesAsync(idTeacher);
             return Ok(classes);
         }
-        private static List<InfinityStudentIdDto> _infinityStudentIds = new List<InfinityStudentIdDto>();
+        private static List<InfinityUserIdDto> _infinityStudentIds = new List<InfinityUserIdDto>();
+        private static List<InfinityUserIdDto> _infinityParentIds = new List<InfinityUserIdDto>();
+        private static List<InfinityUserIdDto> _infinityTeacherIds = new List<InfinityUserIdDto>();
         [HttpGet("student/infiniteId")]
-        public IActionResult Get()
+        public IActionResult GetStudentInfiniteId()
         {
             return Ok(_infinityStudentIds);
         }
-        [HttpPost("student/infiniteId/{studentId}")]
-        public IActionResult Post(int studentId)
+        [HttpPost("student/infiniteId")]
+        public IActionResult PostStudentInfiniteId([FromBody] InfinityUserIdDto user)
         {
-             _infinityStudentIds.Add(new InfinityStudentIdDto
-            {
+             _infinityStudentIds.Add(new InfinityUserIdDto
+             {
                  Id = _infinityStudentIds.Count+1,
-                StudentId = studentId
-            });
+                UserId = user.UserId
+             });
             return Ok(_infinityStudentIds);
+        }
+
+
+        [HttpGet("parent/infiniteId")]
+        public IActionResult GetparentInfiniteId()
+        {
+            return Ok(_infinityParentIds);
+        }
+        [HttpPost("parent/infiniteId")]
+        public IActionResult PostparentInfiniteId([FromBody] InfinityUserIdDto user)
+        {
+            _infinityParentIds.Add(new InfinityUserIdDto
+            {
+                Id = _infinityParentIds.Count + 1,
+                UserId = user.UserId
+            });
+            return Ok(_infinityParentIds);
+        }
+
+
+        [HttpGet("teacher/infiniteId")]
+        public IActionResult GetTeacherInfiniteId()
+        {
+            return Ok(_infinityTeacherIds);
+        }
+        [HttpPost("teacher/infiniteId")]
+        public IActionResult PostTeacherInfiniteId([FromBody] InfinityUserIdDto user)
+        {
+            _infinityTeacherIds.Add(new InfinityUserIdDto
+            {
+                Id = _infinityTeacherIds.Count + 1,
+                UserId = user.UserId
+            });
+            return Ok(_infinityTeacherIds);
         }
     }
     

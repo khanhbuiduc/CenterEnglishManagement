@@ -29,6 +29,12 @@ namespace CenterEnglishManagement.Controllers.OtherController
             return Ok(_mapper.Map<UserDto>(user));
         }
         [HttpGet("parent/{parentId}")]
+
+
+
+
+
+
         public async Task<ActionResult> FindStudentsByParentId(int parentId)
         {
             var users = await _services.GetStudentsByParentIdAsync(parentId);
