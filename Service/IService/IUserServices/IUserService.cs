@@ -12,5 +12,6 @@ namespace CenterEnglishManagement.Service.IService.IUserServices
         Task<User> ValidateUser(string email, string password);
         List<int> PaymentandTuitionTotal();
         Task<IEnumerable<Class>> GetTeacherClassesAsync(int teacherId);
+        Task UpdateUserAsync(User user);
     }
 }
