@@ -14,5 +14,15 @@ namespace CenterEnglishManagement.Controllers.OtherController
         {
             _services = services;
         }
+        [HttpGet("{classId}/{studentId}/dates")]
+        public async Task<IActionResult> GetScheduleDates(int classid,int studentId)
+        {
+            var schedule= await _services.GetScheduleDatesAsync(classid);
+            var attendance=await _services.GetAttendanceByStudentIdAsync(studentId);
+            return Ok(new 
+            {
+                schedule, attendance
+            });
+        }
     }
 }
