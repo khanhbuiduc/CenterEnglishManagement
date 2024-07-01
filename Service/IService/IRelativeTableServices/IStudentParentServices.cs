@@ -1,11 +1,13 @@
-﻿using CenterEnglishManagement.Models.RelateTable;
+﻿using CenterEnglishManagement.Dto.ModelDto.OtherModelDto;
+using CenterEnglishManagement.Models.RelateTable;
 using CenterEnglishManagement.Models.UserModels;
 
 namespace CenterEnglishManagement.Service.IService.IRelativeTableServices
 {
     public interface IStudentParentServices:ICommonServices<StudentParent>
     {
-        User GetParentByStudentId(int studentId);
-       List<User> GetStudentsByParentId(int parentId);
+        Task<User> GetParentByStudentIdAsync(int studentId);
+       Task<IEnumerable<User>> GetStudentsByParentIdAsync(int parentId);
+        Task<IEnumerable<TuitionPaymentDto>> GetPaymentInforByParentIdAsync(int parentId);
     }
 }

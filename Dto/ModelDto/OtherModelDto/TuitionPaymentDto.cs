@@ -1,6 +1,6 @@
 ﻿namespace CenterEnglishManagement.Dto.ModelDto.OtherModelDto
 {
-    public class TuitionPaymentTotalByStudent
+    public class TuitionPaymentDto
     {
         public int StudentId { get; set; }
         public string Name {  get; set; }

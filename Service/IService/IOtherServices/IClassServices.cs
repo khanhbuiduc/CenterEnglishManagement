@@ -11,5 +11,8 @@ namespace CenterEnglishManagement.Service.IService.IOtherServices
         Task<Schedule> CreateScheduleAsync(Schedule schedule);
         Task<bool> ClassNameExistsAsync(string className, string grade, int year);
         Task<UserDto> GetTeacherByClassIdAsync(int classId);
+        Task<IEnumerable<Class>> FindClassByGradeAsync(string grade);
+        Task<IEnumerable<Class>> FindClassByYearAsync(string grade, int year);
+        Task<IEnumerable<Class>> FindClassByNameAsync(string grade, int year, string name);
     }
 }

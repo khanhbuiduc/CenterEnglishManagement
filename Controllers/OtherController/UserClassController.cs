@@ -6,6 +6,7 @@ using CenterEnglishManagement.Service.IService.IRelativeTableServices;
 using CenterEnglishManagement.Service.IService.IUserServices;
 using CenterEnglishManagement.Service.RelativeTableServices;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace CenterEnglishManagement.Controllers.OtherController
 {
@@ -40,6 +41,6 @@ namespace CenterEnglishManagement.Controllers.OtherController
 
             return NoContent();
         }
-         
+        
     }
 }

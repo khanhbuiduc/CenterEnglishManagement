@@ -19,9 +19,9 @@ namespace CenterEnglishManagement.Controllers.OtherController
         }
 
         [HttpGet("child/{studentId}")]
-        public  ActionResult FindParentByStudentId(int studentId)
+        public async Task<ActionResult> FindParentByStudentId(int studentId)
         {
-            var user=  _services.GetParentByStudentId(studentId);
+            var user= await _services.GetParentByStudentIdAsync(studentId);
             if (user==null)
             {
                 return NotFound();
@@ -29,9 +29,9 @@ namespace CenterEnglishManagement.Controllers.OtherController
             return Ok(_mapper.Map<UserDto>(user));
         }
         [HttpGet("parent/{parentId}")]
-        public ActionResult FindStudentsByParentId(int parentId)
+        public async Task<ActionResult> FindStudentsByParentId(int parentId)
         {
-            var users = _services.GetStudentsByParentId(parentId);
+            var users = await _services.GetStudentsByParentIdAsync(parentId);
             if (users == null)
             {
                 return NotFound();
@@ -39,6 +39,14 @@ namespace CenterEnglishManagement.Controllers.OtherController
             var userDtos = users.Select(u => _mapper.Map<UserDto>(u));
             return Ok(userDtos);
         }
-
+        [HttpGet("payment/{parentId}")]
+        public async Task<ActionResult> GetPaymentInforByParentId(int parentId) {
+            var PaymentInfors = await _services.GetPaymentInforByParentIdAsync(parentId);
+            if (PaymentInfors == null)
+            {
+                return NotFound();
+            }
+            return Ok(PaymentInfors);
+        }
     }
 }

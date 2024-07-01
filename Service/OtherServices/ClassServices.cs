@@ -4,6 +4,7 @@ using CenterEnglishManagement.Models.OtherModels;
 using CenterEnglishManagement.Models.UserModels;
 using CenterEnglishManagement.Service.IService.IOtherServices;
 using Microsoft.EntityFrameworkCore;
+using System.Diagnostics;
 
 namespace CenterEnglishManagement.Service.OtherServices
 {
@@ -67,6 +68,19 @@ namespace CenterEnglishManagement.Service.OtherServices
                 Gender = teacher.Gender,
                 Address = teacher.Address
             };
+
+        }
+        public async Task<IEnumerable<Class>> FindClassByGradeAsync(string grade)
+        {
+            return await _context.Classes.Where(c=> c.Grade == grade).ToListAsync();
+        }
+        public async Task<IEnumerable<Class>> FindClassByYearAsync(string grade,int year)
+        {
+            return await _context.Classes.Where(c => c.Grade == grade && c.Year==year).ToListAsync();
+        }
+        public async Task<IEnumerable<Class>> FindClassByNameAsync(string grade, int year,string name)
+        {
+            return await _context.Classes.Where(c => c.Grade == grade && c.Year == year&&c.ClassName==name).ToListAsync();
         }
     }
 }
