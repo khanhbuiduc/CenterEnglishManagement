@@ -37,6 +37,7 @@ namespace CenterEnglishManagement.Controllers.OtherController
             var newClass = new Class
             {
                 IsActive = classDto.IsActive,
+                UrlImg= classDto.UrlImg,
                 Grade = classDto.Grade,
                 Year = classDto.Year,
                 ClassName = classDto.ClassName,
