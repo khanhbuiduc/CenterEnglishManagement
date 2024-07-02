@@ -70,13 +70,18 @@ namespace CenterEnglishManagement.Service.OtherServices
             };
 
         }
-        public async Task<IEnumerable<Schedule>> FindSchedule(int classId)
+        public async Task<Schedule> FindSchedule(int classId)
         {
-            return await _context.Schedules.Where(c => c.ClassId == classId).ToListAsync();
+            return await _context.Schedules.Where(c => c.ClassId == classId).FirstOrDefaultAsync();
         }
-        public async Task<IEnumerable<TuitionFee>> FindTuition(int classId)
+        public async Task<TuitionFee> FindTuition(int classId)
         {
-            return await _context.TuitionFees.Where(c => c.ClassId == classId).ToListAsync();
+            return await _context.TuitionFees.Where(c => c.ClassId == classId).FirstOrDefaultAsync();
+        }
+        public async Task<int> FindClassIdByStudentId(int StudentId)
+        {
+
+            return await _context.UserClasses.Where(c => c.UserId == StudentId).Select(c=> c.ClassId).FirstOrDefaultAsync();
         }
 
         public async Task<IEnumerable<Class>> FindClassByGradeAsync(string grade)
@@ -94,7 +99,7 @@ namespace CenterEnglishManagement.Service.OtherServices
         }
         public async Task<IEnumerable<int>> FindYearByNameAsync(string grade, string name)
         {
-            return await _context.Classes.Where(c => c.Grade == grade && c.ClassName == name).Select(c=>c.Year).ToListAsync();
+            return await _context.Classes.Where(c => c.Grade == grade && c.ClassName == name).Distinct().Select(c=>c.Year).ToListAsync();
         }
     }
 }
