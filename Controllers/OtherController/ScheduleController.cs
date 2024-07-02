@@ -25,5 +25,7 @@ namespace CenterEnglishManagement.Controllers.OtherController
                 schedule, attendance
             });
         }
+        
+
     }
 }
