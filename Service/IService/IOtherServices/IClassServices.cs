@@ -12,6 +12,7 @@ namespace CenterEnglishManagement.Service.IService.IOtherServices
         Task<bool> ClassNameExistsAsync(string className, string grade, int year);
         Task<UserDto> GetTeacherByClassIdAsync(int classId);
         Task<IEnumerable<Schedule>> FindSchedule(int classId);
+        Task<IEnumerable<TuitionFee>> FindTuition(int classId);
         Task<IEnumerable<Class>> FindClassByGradeAsync(string grade);
         Task<IEnumerable<Class>> FindClassByYearAsync(string grade, int year);
         Task<IEnumerable<Class>> FindClassByNameAsync(string grade, int year, string name);

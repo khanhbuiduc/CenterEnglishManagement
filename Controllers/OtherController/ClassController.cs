@@ -109,8 +109,15 @@ namespace CenterEnglishManagement.Controllers.OtherController
         public async Task<IActionResult> GetScheduleByIdClasss(int classId)
         {
             var schedule= await _services.FindSchedule(classId);
+
             return Ok(schedule);
         }
-            
+        /*[HttpGet("{classId}/infor")]
+        public async Task<IActionResult> getInforClass(int classId)
+        {
+            var schedule = await _services.FindSchedule(classId);
+            var tuittion = await _services.
+            retur
+        }*/
     }
 }
