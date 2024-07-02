@@ -6,6 +6,7 @@ using CenterEnglishManagement.Service.OtherServices;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Diagnostics;
 
 namespace CenterEnglishManagement.Controllers.OtherController
 {
@@ -112,12 +113,31 @@ namespace CenterEnglishManagement.Controllers.OtherController
 
             return Ok(schedule);
         }
-        /*[HttpGet("{classId}/infor")]
-        public async Task<IActionResult> getInforClass(int classId)
+        [HttpGet("{studentId}/infor")]
+        public async Task<IActionResult> getInforClass(int studentId)
         {
+            var classId= await _services.FindClassIdByStudentId(studentId);
+            var newClass=await _services.GetbyIdAsync(classId);
             var schedule = await _services.FindSchedule(classId);
-            var tuittion = await _services.
-            retur
-        }*/
+            var tuition = await _services.FindTuition(classId);
+            var classinfor = new ClassDto
+            {
+                IsActive = newClass.IsActive,
+                UrlImg = newClass.UrlImg,
+                Grade = newClass.Grade,
+                Year = newClass.Year,
+                ClassName = newClass.ClassName,
+                TuitionFeeAmount = tuition.Amount,
+                TeacherId = newClass.TeacherId,
+                ScheduleDto = new ScheduleDto
+                {
+                    DateType=schedule.DateType,
+                    Shift=schedule.Shift,
+                    StartTime=schedule.StartTime.ToString("yyyy-MM-dd"),
+                    NumOfSession=schedule.NumOfSession,
+                }
+            };
+            return Ok(classinfor) ;
+        }
     }
 }
