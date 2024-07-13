@@ -45,8 +45,12 @@ namespace CenterEnglishManagement.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            await _commonServices.DeleteAsync(id);
-            return Ok();
+            try {  await _commonServices.DeleteAsync(id);
+                return Ok();
+            } catch (Exception ex) { 
+                return BadRequest(ex.Message);
+            }
+            
         }
 
     }
