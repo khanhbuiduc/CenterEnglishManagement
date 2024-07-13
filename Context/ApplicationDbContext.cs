@@ -32,32 +32,15 @@ namespace CenterEnglishManagement.Context
             modelBuilder.Entity<StudentParent>()
                 .HasOne(sp => sp.Student)
                 .WithMany()
-                .HasForeignKey(sp => sp.StudentId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .HasForeignKey(sp => sp.StudentId);
+            /*.OnDelete(DeleteBehavior.Restrict);*/
 
             modelBuilder.Entity<StudentParent>()
                 .HasOne(sp => sp.Parent)
                 .WithMany()
-                .HasForeignKey(sp => sp.ParentId)
-                .OnDelete(DeleteBehavior.Restrict);
-            /*
-                        modelBuilder.Entity<UserClass>()
-                            .HasOne(sp => sp.User)
-                            .WithMany()
-                            .HasForeignKey(sp => sp.UserId)
-                            .OnDelete(DeleteBehavior.Restrict);
-
-                        modelBuilder.Entity<UserClass>()
-                            .HasOne(sp => sp.Class)
-                            .WithMany()
-                            .HasForeignKey(sp => sp.ClassId)
-                            .OnDelete(DeleteBehavior.Restrict);
-
-                        modelBuilder.Entity<Class>()
-                            .HasOne(sp => sp.Teacher)
-                            .WithMany()
-                            .HasForeignKey(sp => sp.TeacherId)
-                            .OnDelete(DeleteBehavior.Restrict);*/
+                .HasForeignKey(sp => sp.ParentId);
+                /*.OnDelete(DeleteBehavior.Restrict);*/
+          
         }
 
     }

@@ -18,12 +18,20 @@ namespace CenterEnglishManagement.Controllers.OtherController
         public async Task<IActionResult> GetScheduleDates(int studentId)
         {
 
-            var schedule= await _services.GetScheduleDatesAsync(studentId);
-            var attendance=await _services.GetAttendanceByStudentIdAsync(studentId);
-            return Ok(new 
+            try
             {
-                schedule, attendance
-            });
+                var schedule = await _services.GetScheduleDatesAsync(studentId);
+                var attendance = await _services.GetAttendanceByStudentIdAsync(studentId);
+                return Ok(new
+                {
+                    schedule,
+                    attendance
+                });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
         
 
