@@ -7,5 +7,6 @@ namespace CenterEnglishManagement.Service.IService.IOtherServices
         int GetTuitionFeeAmountByClassId(int classId);
         public decimal CalculateTotalTuitionFees();
         public decimal CalculateTotalTuitionFeeForUser(int userId);
+        Task<int[]> TuitionFeeStatisticAsync(int year);
     }
 }

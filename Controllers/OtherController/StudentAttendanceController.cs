@@ -35,25 +35,25 @@ namespace CenterEnglishManagement.Controllers.OtherController
         }
 
 
-        [HttpGet("monthly")]
-        [Authorize(Policy = "StudentPolicy")]
-        public async Task<IActionResult> GetMonthlyStudent()
+        [HttpGet("studentStatic/{year}/monthly")]
+        /*[Authorize(Policy = "StudentPolicy")]*/
+        public async Task<IActionResult> GetMonthlyStudent(int year)
         {
-            var entity=await _StudentAttendanceServices.GetMonthlyStudentAttendanceAsync();
+            var entity=await _StudentAttendanceServices.GetMonthlyStudentAttendanceAsync(year);
             return Ok(entity);
         }
-        [HttpGet("quarterly")]
+        [HttpGet("studentStatic/{year}/quarterly")]
         /*[Authorize(Policy = "StudentPolicy")]*/
-        public async Task<IActionResult> GetQuarterlyStudent()
+        public async Task<IActionResult> GetQuarterlyStudent(int year)
         {
 
-            var entity =await _StudentAttendanceServices.GetQuarterlyStudentAttendanceAsync();
+            var entity =await _StudentAttendanceServices.GetQuarterlyStudentAttendanceAsync( year);
             return Ok(entity);
         }
-        [HttpGet("yearly")]
-        public async Task<IActionResult> GetYearlyStudent()
+        [HttpGet("studentStatic/{year}")]
+        public async Task<IActionResult> GetYearlyStudent(int year)
         {
-            var entity =await _StudentAttendanceServices.GetYearlyStudentAttendanceAsync();
+            var entity =await _StudentAttendanceServices.GetYearlyStudentAttendanceAsync(year);
             return Ok(entity);
         }
     }

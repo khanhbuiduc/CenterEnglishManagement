@@ -5,8 +5,8 @@ namespace CenterEnglishManagement.Service.IService.IOtherServices
 {
     public interface IStudentAttendanceServices: ICommonServices<StudentAttendance>
     {
-       Task<List<MonthlyStudentStatisticDto>> GetMonthlyStudentAttendanceAsync();
-        Task<List<QuarterlyStudentStatisticDto>> GetQuarterlyStudentAttendanceAsync();
-        Task<List<YearlyStudentStatisticDto>> GetYearlyStudentAttendanceAsync();
+        Task<int[]> GetMonthlyStudentAttendanceAsync(int year);
+        Task<int[]> GetQuarterlyStudentAttendanceAsync(int year);
+        Task<int[]> GetYearlyStudentAttendanceAsync(int year);
     }
 }

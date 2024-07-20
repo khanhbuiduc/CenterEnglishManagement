@@ -86,6 +86,21 @@ namespace CenterEnglishManagement.Controllers.UserController
             var classes = await _services.GetTeacherClassesAsync(idTeacher);
             return Ok(classes);
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         private static List<InfinityUserIdDto> _infinityStudentIds = new List<InfinityUserIdDto>();
         private static List<InfinityUserIdDto> _infinityParentIds = new List<InfinityUserIdDto>();
         private static List<InfinityUserIdDto> _infinityTeacherIds = new List<InfinityUserIdDto>();
