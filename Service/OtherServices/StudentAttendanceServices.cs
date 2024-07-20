@@ -13,11 +13,11 @@ namespace CenterEnglishManagement.Service.OtherServices
         {
             _context = context;
         }
-        public async Task<List<MonthlyStudentStatisticDto>> GetMonthlyStudentAttendanceAsync()
+        public async Task<int[]> GetMonthlyStudentAttendanceAsync(int year)
         {
-        
 
-            var monthlyStatistics =await _context.StudentAttendances
+            var monthlyStatistics = new int[12];
+            var attendanceData =await _context.StudentAttendances.Where(a=>a.Date.Year==year)
                 .GroupBy(a => new { a.Date.Year, a.Date.Month })
                 .Select(g => new MonthlyStudentStatisticDto
                 {
@@ -26,12 +26,16 @@ namespace CenterEnglishManagement.Service.OtherServices
                     StudentCount = g.Select(a => a.UserId).Distinct().Count()
                 })
                 .ToListAsync();
-
+            foreach (var data in attendanceData)
+            {
+                monthlyStatistics[data.Month - 1] = data.StudentCount;
+            }
             return monthlyStatistics;
         }
-        public async Task<List<QuarterlyStudentStatisticDto>> GetQuarterlyStudentAttendanceAsync()
+        public async Task<int[]> GetQuarterlyStudentAttendanceAsync(int year)
         {
-            var quarterlyStatistics =await _context.StudentAttendances
+            var quaterlyStatistics = new int[4];
+            var attendanceData = await _context.StudentAttendances.Where(a=>a.Date.Year==year)
                 .GroupBy(a => new
                 {
                     a.Date.Year,
@@ -44,13 +48,17 @@ namespace CenterEnglishManagement.Service.OtherServices
                     StudentCount = g.Select(a => a.UserId).Distinct().Count()
                 })
                 .ToListAsync();
-
-            return quarterlyStatistics;
+            foreach (var data in attendanceData)
+            {
+                quaterlyStatistics[data.Quarter - 1] = data.StudentCount;
+            }
+            return quaterlyStatistics;
         }
 
-        public async Task<List<YearlyStudentStatisticDto>> GetYearlyStudentAttendanceAsync()
+        public async Task<int[]> GetYearlyStudentAttendanceAsync(int year)
         {
-            var yearlyStatistics =await _context.StudentAttendances
+            var yearlyStatistics = new int[1];
+            var attendanceData = await _context.StudentAttendances.Where(a=> a.Date.Year == year)
                 .GroupBy(a => a.Date.Year)
                 .Select(g => new YearlyStudentStatisticDto
                 {
@@ -58,7 +66,10 @@ namespace CenterEnglishManagement.Service.OtherServices
                     StudentCount = g.Select(a => a.UserId).Distinct().Count()
                 })
                 .ToListAsync();
-
+            foreach(var data in attendanceData)
+            {
+                yearlyStatistics[0] = data.StudentCount;
+            }
             return yearlyStatistics;
         }
 

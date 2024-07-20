@@ -6,5 +6,6 @@ namespace CenterEnglishManagement.Service.IService.IOtherServices
     {
         public int CalculateTotalPayments();
         public int CalculateTotalPaymentsForStudent(int studentId);
+        Task<int[]> PaymentStatisticAsync(int year);
     }
 }

@@ -42,5 +42,11 @@ namespace CenterEnglishManagement.Controllers.OtherController
             }
             return Ok("success");
         }
+        [HttpGet("statistic/{year}")]
+        public async Task<IActionResult> PaymentStatistic(int year)
+        {
+            var entity =await _services.PaymentStatisticAsync(year);
+            return Ok(entity);
+        }
     }
 }

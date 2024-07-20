@@ -26,5 +26,11 @@ namespace CenterEnglishManagement.Controllers.OtherController
             var entity = _service.CalculateTotalTuitionFeeForUser(studentId);
             return Ok(entity);
         }
+        [HttpGet("statistic/{year}")]
+        public async Task<IActionResult> MonthlyStatisticTuition(int year)
+        {
+            var statistic= await _service.TuitionFeeStatisticAsync(year);
+            return Ok(statistic);
+        }
     }
 }
